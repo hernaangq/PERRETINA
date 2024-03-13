@@ -1,0 +1,19 @@
+{
+    "files.associations": {
+        "port_tx.h": "c",
+        "port_system.h": "c",
+        "stm32f4xx.h": "c",
+        "fsm_button.h": "c",
+        "math.h": "c",
+        "port_buzzer.h": "c",
+        "fsm_tx.h": "c",
+        "port_sensor.h": "c",
+        "type_traits": "c",
+        "fsm_sensor.h": "c",
+        "port_rgb.h": "c",
+        "commands.h": "c",
+        "fsm_retina.h": "c",
+        "stdbool.h": "c",
+        "fsm.h": "c"
+    }
+}

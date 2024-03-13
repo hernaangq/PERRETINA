@@ -1,0 +1,98 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Debug device STM32F446RE",
+        "cwd": "${workspaceRoot}", 
+        "executable": "${workspaceFolder}/output/${workspaceFolderBasename}.elf",
+        "request": "launch",
+        "runToEntryPoint": "main",
+        "type": "cortex-debug",
+        "servertype": "openocd",
+        "device": "STM32F446RE",
+        "serverpath": "C:/Program Files/openocd/bin/openocd.exe",
+        "configFiles": [
+          "port/nucleo_stm32f446re/openocd.cfg"
+        ],
+        "preLaunchTask": "Clean & Re-Build NUCLEO_STM32F446RE",
+        "svdFile": "../../svd/STM32F446.svd",
+        "swoConfig": {
+          "enabled": true,
+          "cpuFrequency": 16000000,
+          "swoFrequency": 2000000,
+          "source": "probe",
+          "decoders": [
+            {
+              "type": "console",
+              "label": "ITM",
+              "port": 0
+            }
+          ]
+        },
+      },
+      {
+        "name": "Debug device STM32F411RE",
+        "cwd": "${workspaceRoot}", 
+        "executable": "${workspaceFolder}/output/${workspaceFolderBasename}.elf",
+        "request": "launch",
+        "runToEntryPoint": "main",
+        "type": "cortex-debug",
+        "servertype": "openocd",
+        "device": "STM32F411RE",        
+        "configFiles": [
+          "port/nucleo_stm32f411re/openocd.cfg"
+        ],
+        "preLaunchTask": "Clean & Re-Build NUCLEO_STM32F411RE",
+        "svdFile": "../../svd/STM32F411.svd",
+        "swoConfig": {
+          "enabled": true,
+          "cpuFrequency": 16000000,
+          "swoFrequency": 2000000,
+          "source": "probe",
+          "decoders": [
+            {
+              "type": "console",
+              "label": "ITM",
+              "port": 0
+            }
+          ]
+        },
+      },
+      {
+        "name": "Debug PC",
+        "type": "cppdbg", 
+        "request": "launch",
+        "args": [],
+        "stopAtEntry": true,
+        "cwd": "${workspaceFolder}",
+        "environment": [],
+        "externalConsole": false,
+        "program": "${workspaceFolder}/output/${workspaceFolderBasename}",
+        "linux": {
+            "name": "Debug PC -linux",
+            "type": "cppdbg", 
+            "request": "launch",
+            "MIMode": "gdb",
+            "miDebuggerPath": "gdb",
+            "program": "${workspaceFolder}/output/${workspaceFolderBasename}"
+        },
+        "osx": {
+          "name": "Debug PC -mac",
+          "type": "cppdbg", 
+          "request": "launch",
+          "MIMode": "lldb",
+          "miDebuggerPath": "lldb-mi",
+          "program": "${workspaceFolder}/output/${workspaceFolderBasename}"
+        },
+        "windows": {
+          "name": "Debug PC -win",
+          "type": "cppdbg", 
+          "request": "launch",
+          "MIMode": "gdb",
+          "miDebuggerPath": "gdb.exe",
+          "program": "${workspaceFolder}/output/${workspaceFolderBasename}.exe"
+        },
+        "preLaunchTask": "Clean & Re-Build PC"
+    }
+    ]
+}

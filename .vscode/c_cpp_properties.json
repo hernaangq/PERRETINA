@@ -1,0 +1,115 @@
+{
+    "configurations": [
+        {
+            "name": "win32-pc",
+            "includePath": [
+                "${workspaceFolder}/common/**",
+                "${workspaceFolder}/common/include/",
+                "${workspaceFolder}/port/pc/**",
+                "${workspaceFolder}/port/pc/include/"
+            ],
+            "defines": [],
+            "compilerPath": "C:\\msys64\\mingw64\\bin\\gcc.exe",
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "windows-gcc-x64"
+        },
+        {
+            "name": "win32-stm32f446re",
+            "includePath": [
+                "${workspaceFolder}/../../drivers/stm32f4xx/**",
+                "${workspaceFolder}/port/nucleo_stm32f446re/**",
+                "${workspaceFolder}/port/nucleo_stm32f446re/include/",
+                "${workspaceFolder}/common/**",
+                "${workspaceFolder}/common/include/",
+                "C:/Users/quija/sdg/drivers/stm32f4xx/CMSIS/Device/ST/STM32F4xx/Include"
+            ],
+            "defines": [
+                "STM32F446xx"
+            ],
+            "compilerPath": "C:\\Program Files (x86)\\Arm GNU Toolchain arm-none-eabi\\11.3 rel1\\bin\\arm-none-eabi-gcc.exe",
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "windows-gcc-arm"
+        },
+        {
+            "name": "linux-pc",
+            "includePath": [
+                "${workspaceFolder}/common/**",
+                "${workspaceFolder}/common/include/",
+                "${workspaceFolder}/port/pc/**",
+                "${workspaceFolder}/port/pc/include/"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "linux-gcc-x64"
+        },
+        {
+            "name": "linux-stm32f446re",
+            "includePath": [
+                "${workspaceFolder}/../../drivers/stm32f4xx/**",
+                "${workspaceFolder}/port/nucleo_stm32f446re/**",
+                "${workspaceFolder}/port/nucleo_stm32f446re/include/",
+                "${workspaceFolder}/common/**",
+                "${workspaceFolder}/common/include/"
+            ],
+            "defines": [
+                "STM32F446xx"
+            ],
+            "compilerPath": "/usr/bin/arm-none-eabi-gcc",
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "linux-gcc-arm"
+        },
+        {
+            "name": "macos-pc",
+            "includePath": [
+                "${workspaceFolder}/common/**",
+                "${workspaceFolder}/common/include/",
+                "${workspaceFolder}/port/pc/**",
+                "${workspaceFolder}/port/pc/include/"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/clang",
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "macos-gcc-x64"
+        },
+        {
+            "name": "macos-stm32f446re",
+            "includePath": [
+                "${workspaceFolder}/../../drivers/stm32f4xx/**",
+                "${workspaceFolder}/port/nucleo_stm32f446re/**",
+                "${workspaceFolder}/port/nucleo_stm32f446re/include/",
+                "${workspaceFolder}/common/**",
+                "${workspaceFolder}/common/include/"
+            ],
+            "defines": [
+                "STM32F446xx"
+            ],
+            "compilerPath": "/usr/local/bin/arm-none-eabi-gcc",
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "macos-gcc-arm",
+            "configurationProvider": "ms-vscode.makefile-tools"
+        },
+        {
+            "name": "hernangcc",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "compilerPath": "C:\\msys64\\mingw64\\bin\\gcc.exe",
+            "cStandard": "c17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "windows-gcc-x64"
+        }
+    ],
+    "version": 4
+}

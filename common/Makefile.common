@@ -1,0 +1,15 @@
+INCLUDE := $(COMMON)/include
+SRC := $(COMMON)/src
+
+ifeq ($(OS),Windows_NT)
+SOURCEDIRS	:= $(SRC)
+INCLUDEDIRS	:= $(INCLUDE)
+else
+SOURCEDIRS	:= $(shell find $(SRC) -type d)
+INCLUDEDIRS	:= $(shell find $(INCLUDE) -type d)
+endif
+
+SOURCES	 += $(wildcard $(patsubst %,%/*.c, $(SOURCEDIRS)))
+INCLUDES += $(patsubst %,-I%, $(INCLUDEDIRS:%/=%))
+
+C_DEFS +=

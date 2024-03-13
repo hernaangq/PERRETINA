@@ -1,0 +1,135 @@
+######################################
+# MCU
+######################################
+PREFIX = arm-none-eabi-
+
+EXT = .elf
+
+######################################
+# USE STM32 HAL 
+######################################
+# ATTENTION! To use the HAL define "USE_HAL_DRIVER" to "yes" (default "no")
+# In addition, stm32f4xx_hal_conf_template.h
+USE_HAL_DRIVER ?= no
+
+ifeq ($(USE_HAL_DRIVER),no)
+$(info ************  BARE-METAL VERSION ************)
+else
+$(info ************  THIS CODE RUNS USES THE STM32 HAL ************)
+$(info ** You need to add stm32f4xx_hal_conf.h to the port/xxx/include folder. ** )
+$(info ** You can adapt and rename a copy of the template in /drivers/stm32f4xx/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_conf_template.h **)
+endif
+
+# define MCU prefix
+PORT_DRIVERS := $(DRIVERS)/stm32f4xx
+CMSIS_DIR := $(PORT_DRIVERS)/CMSIS
+
+ifneq ($(USE_HAL_DRIVER),no)
+HAL_DIR := $(PORT_DRIVERS)/STM32F4xx_HAL_Driver
+HAL_SRC := $(HAL_DIR)/Src
+HAL_INC := $(HAL_DIR)/Inc
+
+SOURCES +=  \
+$(HAL_SRC)/stm32f4xx_hal_tim.c \
+$(HAL_SRC)/stm32f4xx_hal_tim_ex.c \
+$(HAL_SRC)/stm32f4xx_hal_uart.c \
+$(HAL_SRC)/stm32f4xx_hal.c \
+$(HAL_SRC)/stm32f4xx_hal_i2c.c \
+$(HAL_SRC)/stm32f4xx_hal_i2c_ex.c \
+$(HAL_SRC)/stm32f4xx_hal_rcc.c \
+$(HAL_SRC)/stm32f4xx_hal_rcc_ex.c \
+$(HAL_SRC)/stm32f4xx_hal_flash.c \
+$(HAL_SRC)/stm32f4xx_hal_flash_ex.c \
+$(HAL_SRC)/stm32f4xx_hal_flash_ramfunc.c \
+$(HAL_SRC)/stm32f4xx_hal_gpio.c \
+$(HAL_SRC)/stm32f4xx_hal_dma.c \
+$(HAL_SRC)/stm32f4xx_hal_dma_ex.c \
+$(HAL_SRC)/stm32f4xx_hal_pwr.c \
+$(HAL_SRC)/stm32f4xx_hal_pwr_ex.c \
+$(HAL_SRC)/stm32f4xx_hal_cortex.c \
+$(HAL_SRC)/stm32f4xx_hal_exti.c
+endif
+
+SOURCES += $(wildcard $(patsubst %,%/*.c, $(PORT)/$(PLATFORM)/src))
+
+# ASM sources
+AS_SOURCES += $(CMSIS_DIR)/Device/ST/STM32F4xx/Source/Templates/gcc/startup_stm32f446xx.s
+
+# cpu
+CPU := -mcpu=cortex-m4
+
+# fpu
+FPU := -mfpu=fpv4-sp-d16
+
+# float-abi
+FLOAT-ABI = -mfloat-abi=hard
+
+# mcu
+MCU = $(CPU) -mthumb $(FPU) $(FLOAT-ABI)
+
+# macros for gcc
+# AS defines
+AS_DEFS += 
+
+# C defines
+C_DEFS += -DSTM32F446xx
+
+ifneq ($(USE_HAL_DRIVER),no)
+C_DEFS += -DUSE_HAL_DRIVER
+endif
+
+# AS includes
+AS_INCLUDES += 
+
+# Directories with required header files for drivers
+INCLUDES += -I$(CMSIS_DIR)/Device/ST/STM32F4xx/Include
+INCLUDES += -I$(CMSIS_DIR)/Include
+ifneq ($(USE_HAL_DRIVER),no)
+INCLUDES += -I$(HAL_INC)
+endif
+
+# Directories with required header files for port files
+INCLUDES += -I$(PORT)/$(PLATFORM)/include
+
+#######################################
+# CFLAGS
+#######################################
+ASFLAGS += $(MCU)
+CFLAGS += $(MCU)
+
+#######################################
+# LDFLAGS
+#######################################
+# link script
+LDSCRIPT = $(PORT)/$(PLATFORM)/STM32F446RETx_FLASH.ld
+LIBS += -lc -lm -lnosys
+
+LDFLAGS += $(MCU) -specs=nano.specs -T$(LDSCRIPT) $(LIBS) 
+
+bin: $(OUTPUT)/$(TARGET)$(EXT) $(OUTPUT)/$(TARGET).hex $(OUTPUT)/$(TARGET).bin
+
+$(OUTPUT)/%.hex: $(OUTPUT)/%$(EXT) | $(OUTPUT)
+	$(HEX) $< $@
+	
+$(OUTPUT)/%.bin: $(OUTPUT)/%$(EXT) | $(OUTPUT)
+	$(BIN) $< $@
+
+#######################################
+# flash
+#######################################
+ifeq ($(OS),Windows_NT)
+OPENOCD := "C:/Program Files/openocd/bin/openocd.exe"
+else
+OPENOCD := "openocd"
+endif
+
+flash: $(OUTPUT)/$(TARGET)$(EXT)
+	$(OPENOCD) -f $(PORT)/$(PLATFORM)/openocd.cfg -c "program $< verify reset exit"
+	
+#######################################
+# erase
+#######################################
+erase:	
+	$(OPENOCD) -f $(PORT)/$(PLATFORM)/openocd.cfg -c "init; reset halt; stm32f4x mass_erase 0; exit"	
+
+.PHONY: bin flash erase

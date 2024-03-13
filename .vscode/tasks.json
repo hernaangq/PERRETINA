@@ -1,0 +1,103 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build NUCLEO_STM32F446RE",
+			"options": {
+				"cwd": "${workspaceRoot}"
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"linux": {
+				"command": "make"
+			},
+			"osx": {
+				"command": "make"
+			},
+			"windows": {
+				"command": "mingw32-make"
+			},
+			"args": [
+				"PLATFORM=nucleo_stm32f446re"
+			]
+		},
+		{
+			"label": "Build PC",
+			"options": {
+				"cwd": "${workspaceRoot}"
+			},
+			"group": {
+				"kind": "build"
+			},
+			"linux": {
+				"command": "make"
+			},
+			"osx": {
+				"command": "make"
+			},
+			"windows": {
+				"command": "mingw32-make"
+			},
+			"args": [
+				"PLATFORM=pc"
+			]
+		},
+		{
+			"label": "Clean",
+			"command": "make",
+			"options": {
+				"cwd": "${workspaceRoot}"
+			},
+			"linux": {
+				"command": "make"
+			},
+			"osx": {
+				"command": "make"
+			},
+			"windows": {
+				"command": "mingw32-make"
+			},
+			"args": [
+				"clean"
+			]
+		},
+		{
+			"label": "Clean & Re-Build NUCLEO_STM32F446RE",
+			"dependsOn": [
+				"Clean",
+				"Build NUCLEO_STM32F446RE"
+			],
+			"dependsOrder": "sequence"
+		},
+		{
+			"label": "Clean & Re-Build PC",
+			"dependsOn": [
+				"Clean",
+				"Build PC"
+			],
+			"dependsOrder": "sequence"
+		},
+		{
+			"label": "Flash NUCLEO_STM32F446RE",
+			"options": {
+				"cwd": "${workspaceRoot}"
+			},
+			"linux": {
+				"command": "make"
+			},
+			"osx": {
+				"command": "make"
+			},
+			"windows": {
+				"command": "mingw32-make"
+			},
+			"args": [
+				"flash",
+				"PLATFORM=nucleo_stm32f446re"
+			],
+			"problemMatcher": []
+		}
+	]
+}
