@@ -1,75 +1,108 @@
-# PERRETINA - Hernán García Quijano & Ángel Rodrigo Pérez Iglesias
- 
-Este es nuestro proyecto **PERRETINA** del curso 2022-2023 de la asignatura de Sistemas Digitales II. 
+# 🐶 PERRETINA — Hernán García Quijano & Ángel Rodrigo Pérez Iglesias
 
-![foto1](https://lh3.googleusercontent.com/pw/AJFCJaUbV2pstc6I94YPashC6WMACJv6riVmZPGBhgOmsZkg-Q3ZTyrHig7mV8MMm2iA64zkd7gukXwXcRu61Zlos5oNgVyw5kYUJIXUIgpTTvmKvhpFYWw=w2400)
+This is our **PERRETINA** project developed for the **Digital Systems II** course during the 2022–2023 academic year.
 
-![foto2](https://lh3.googleusercontent.com/om7DVhZdZ-7e99xcDsF9r3ANLxoo6NIUjGKY47pwj1_91O13wr4oSGkRlyJsz0HMTB35HjiEwBCth1SthKdRYjdKkr4E0eStNAxGgt4_Z5w6gPsqM7RRsMwpTHlJyOMEeCjt883WbQ=w2400)
-
-Este proyecto consigue transmitir y recibir tramas NEC con distintos comandos para cumplir diversas funcionalidades. 
-El objetivo principal del proyecto es la transmisión y recepción de tramas NEC que muestren distintos colores RGB. En nuestro caso, mediante los conocimientos adquiridos a lo largo de la asignatura, hemos añadido las siguientes mejoras:
-- Implementación de un buzzer que funciona mediante ondas PWM, al igual que el transmisor.
-- Instalación de un fotorresistor para utilizarlo como un detector de luz. Cuando detecta que hay poca luz entra en el estado de emergencia.
-- El núcleo va alimentado por una batería portátil de 5V y 2A.
-
-Estas mejoras han sido añadidas con el objetivo de convertir el proyecto en algo más funcional que una placa a la que se le manden comandos. Hemos querido darle un sentido y hemos construido un arnés de perro que se controla mediante un mando de comandos infrarrojos. Las características del sistema han hecho que nos centremos exclusivamente en el modo de recepción de tramas NEC:
-- Al igual que en el proyecto inicial, el LED RGB del sistema es capaz de emitir 8 colores RGB distintos en función del comando que se le mande (rojo, verde, azul, cyan, magenta, amarillo, blanco y negro/apagado).
-- Cuando se pulsa el botón FADE del mando, el buzzer emite una melodía de duración aproximada de 1 minuto.
-- Si se detecta que hay poca luz el dispositivo entrará en estado de emergencia, es decir, el buzzer emitirá un "DO" y el LED se quedará en el color blanco mientras dure la emergencia. En el momento que se vuelva a detectar una luz normal, el buzzer emitirá un "RE" y el LED una luz verde, indicando que ya está todo bien. Acto seguido se podrá volver a cambiar de color.
-- Todo ello montado sobre un arnés con una batería externa que convierte nuestro proyecto en un sistema digital inalámbrico, que hace cobrar sentido práctico a los modos de bajo consumo añadimos en la última versión.
-
-Para añadir estas mejoras, hemos tenido que modificar la máquina de estados principal: fsm_retina, y añadir una nueva máquina de estados para el fotorresistor: 
-
-**Nuevo diagrama de estados del sistema RETINA:**
-![fsm_retina](https://lh3.googleusercontent.com/Udi3_ZkyR1Do30hfkRrFtgCCvuD7rsJQtpDQaoGvN5AN8MvmftYa4FdO4cskREJ11nS1wv4IoJsxC2JnR6CjBWy483swtLkRj_DAgUl2QtJeagxNfd5O1-qoHiDPlNuMID26EpKy8w=w2400)
-
-**Diagrama de estados del sensor de luz:**
-![fsm_sensor](https://lh3.googleusercontent.com/yADnEf5m1xdEqufH7lk8JDDNgubMZ1FMDYopBoOQzBhpLYbEQaMIRCb9F3_qxf0K3s1OYS9aDWtHqzv5eG7tM0KUZrLGMs5p1nMh-D8NgLnkFWe8ET00m6Gs0_BMtG4BCoGML0_FRA=w2400)
+<div align="center">
+  <img src="https://lh3.googleusercontent.com/pw/AJFCJaUbV2pstc6I94YPashC6WMACJv6riVmZPGBhgOmsZkg-Q3ZTyrHig7mV8MMm2iA64zkd7gukXwXcRu61Zlos5oNgVyw5kYUJIXUIgpTTvmKvhpFYWw=w2400" alt="photo1" width="35%" />
+  <img src="https://lh3.googleusercontent.com/om7DVhZdZ-7e99xcDsF9r3ANLxoo6NIUjGKY47pwj1_91O13wr4oSGkRlyJsz0HMTB35HjiEwBCth1SthKdRYjdKkr4E0eStNAxGgt4_Z5w6gPsqM7RRsMwpTHlJyOMEeCjt883WbQ=w2400" alt="photo2" width="35%" />
+</div>
 
 
+## 🧠 Project Summary
 
-Puedes acceder al vídeo del demostrador del proyecto pinchando en la imagen:
+PERRETINA is an embedded system designed to **transmit and receive NEC frames** with different infrared commands to control system behavior. The main goal is to use NEC communication to control RGB lighting and implement smart features for real-world use.
 
+We enhanced the base project with the following improvements:
+- A **buzzer** using **PWM waves** (like the NEC transmitter).
+- A **photoresistor** that detects ambient light. If it senses darkness, the system enters an **emergency state**.
+- Powered by a **portable battery** (5V, 2A), making the system fully mobile.
 
-[![Demostrador del proyecto Retina](https://lh3.googleusercontent.com/UJ2BvT0R7w5Xqt0GvD2Z_x5curXcVZWYF7HjGHMAfaNtyc13NI0AmlLntinOBD3QDuwAGtM5R9_eIPlE8auZQCsKyoC4AW7WBYbXS1g_OmgJzTPchmwzVB1Bi0L1Rx1fw7MrdlhOWw=w2400)](https://youtu.be/M0baAnunEMg "Demostrador del proyecto Retina.")
+These features were integrated into a **dog harness** controlled via an infrared remote, turning the project into a wireless, digital system with practical functionality.
 
+---
 
-Se adjunta también una captura en el osciloscopio del laboratorio de las tramas NEC transmitidas y detectadas por el sistema RETINA:
-![Captura en el osciloscopio de las tramas NEC transmitidas y detectadas](https://lh3.googleusercontent.com/1y_RJ5e2mZAhHGmtKUDfxnjf7rosQYfcqTePLckxYoT-EMMoUiwKPe_UEizy6JbRhT16V4paQ9FMTEfEqcksWH4PLYCwA0J5xHdzh2J9J1hXSa4Iv5CHAqZ9VsRynUydppO1DYEw3w=w2400)
+## 🧩 Features
 
+- The RGB LED can display **8 different colors** depending on the command received (red, green, blue, cyan, magenta, yellow, white, and off).
+- Pressing the **FADE** button on the remote plays a **1-minute melody** through the buzzer.
+- If low ambient light is detected:
+  - The buzzer emits a “DO” sound.
+  - The RGB LED stays white (emergency mode).
+  - Once light is detected again, the buzzer emits a “RE” sound and the LED turns green.
+- The system’s behavior is modeled using **state machines**.
 
-**Lista de materiales:**
-- Nucleo-STM32F446RE - 1 BASE L1, L2, L3
-- Cable USB. A Macho-B Mini Importante: cable de alimentación y datos
-- Latiguillos macho-macho (Cables de conexión para protoboard)
-- Latiguillos macho-hembra (Cables de conexión para protoboard)
-- Protoboard Tamaño mínimo: 80x60 mm 
-- Diodo emisor infrarrojos De inserción. (Encapsulado 5 mm. Longitud de onda
-central: ∼ 940 − 050 nm. Potencia max: 40 mW e.g.:
-17◦ visión)
-- MOSFET puerta tipo N (Empaquetado: TO-92. Tensión max D-S: 40 − 60 V .
-Corriente max: ∼ 0,5 A)
-- Resistencia 33 Ω (De inserción. Tolerancia: ≤ 10 %. Potencia: 1/4 − 1/2 W)
-- LED RGB cátodo común (De inserción. e.g 60º visión)
-- Receptor de infrarrojos (frecuencia portadora 38kHz. Longitud de onda central: 950nm)
-- Resistencia 150 Ω (De inserción. Tolerancia: ≤ 10 %. Potencia: 1/4 − 1/2 W)
-- Resistencia 91 Ω (De inserción. Tolerancia: ≤ 10 %. Potencia: 1/4 − 1/2 W) x2
-- Dispositivo Buzzer
-- Fotorresistor
-- Batería portátil (5V, 2A)
-- Resistencia 10 kΩ (De inserción. Tolerancia: ≤ 10 %. Potencia: 1/4 − 1/2 W)
-- Carcasa de plástico para el montaje.
-- Arnés de perro pequeño
+---
+
+## 🧮 FSM Diagrams
+
+**Main RETINA state machine:**
 
 
-_Ningún animal ha sido herido en la realización de este proyecto._
-![PERRETINA](https://lh3.googleusercontent.com/I0k8DUN_ZrI97RdYnjAMDkVELGWVhXaVzxooNWD94KIW9IT8RN0AWRB-J3dDQY4qkLverdWfDn0u_MMyH-d8g9w6XUJjTdA1W-Wm7f-agYLux1-iDf7UV_VWKLB9gEVWWH6S-fLOpQ=w2400)
+<p align="center">
+  <img src="https://lh3.googleusercontent.com/Udi3_ZkyR1Do30hfkRrFtgCCvuD7rsJQtpDQaoGvN5AN8MvmftYa4FdO4cskREJ11nS1wv4IoJsxC2JnR6CjBWy483swtLkRj_DAgUl2QtJeagxNfd5O1-qoHiDPlNuMID26EpKy8w=w2400" alt="fsm_retina" width="70%" />
+</p>
 
-**Información de contacto:**
+**Light sensor state machine:**
 
-**Hernán García Quijano:** <hernan.garcia.quijano@alumnos.upm.es>
+<p align="center">
+  <img src="https://lh3.googleusercontent.com/yADnEf5m1xdEqufH7lk8JDDNgubMZ1FMDYopBoOQzBhpLYbEQaMIRCb9F3_qxf0K3s1OYS9aDWtHqzv5eG7tM0KUZrLGMs5p1nMh-D8NgLnkFWe8ET00m6Gs0_BMtG4BCoGML0_FRA=w2400" alt="fsm_sensor" width="60%" />
+</p>
 
-**Ángel Rodrigo Pérez Iglesias:** <angelrodrigo.perez@alumnos.upm.es>
+---
 
+## 🎥 Project Demonstration
+
+Click the image to watch the video demo of the project:
+
+<p align="center">
+  <a href="https://youtu.be/M0baAnunEMg" title="PERRETINA demo">
+    <img src="https://lh3.googleusercontent.com/UJ2BvT0R7w5Xqt0GvD2Z_x5curXcVZWYF7HjGHMAfaNtyc13NI0AmlLntinOBD3QDuwAGtM5R9_eIPlE8auZQCsKyoC4AW7WBYbXS1g_OmgJzTPchmwzVB1Bi0L1Rx1fw7MrdlhOWw=w2400" alt="PERRETINA demo video" width="50%" />
+  </a>
+</p>
+
+---
+
+## 📷 Oscilloscope Capture
+
+Here is an oscilloscope capture of the NEC frames being transmitted and detected:
+
+![oscilloscope](https://lh3.googleusercontent.com/1y_RJ5e2mZAhHGmtKUDfxnjf7rosQYfcqTePLckxYoT-EMMoUiwKPe_UEizy6JbRhT16V4paQ9FMTEfEqcksWH4PLYCwA0J5xHdzh2J9J1hXSa4Iv5CHAqZ9VsRynUydppO1DYEw3w=w2400)
+
+---
+
+## 🧰 Components Used
+
+- Nucleo-STM32F446RE (BASE L1, L2, L3)
+- USB cable (A Male to B Mini, with power & data)
+- Jumper wires (male-male and male-female)
+- Breadboard (minimum size: 80x60 mm)
+- IR emitter diode (5mm, ~940–1050nm, 40mW, 17° beam)
+- N-type MOSFET (TO-92, 40–60V, ~0.5A)
+- 33 Ω resistor
+- RGB common cathode LED
+- IR receiver (38kHz, 950nm)
+- 150 Ω resistor
+- 91 Ω resistor ×2
+- Buzzer
+- Photoresistor
+- Portable battery (5V, 2A)
+- 10 kΩ resistor
+- Plastic casing
+- Small dog harness
+
+---
+
+**No animals were harmed during the making of this project.**  
+<p align="center">
+  <img src="https://lh3.googleusercontent.com/I0k8DUN_ZrI97RdYnjAMDkVELGWVhXaVzxooNWD94KIW9IT8RN0AWRB-J3dDQY4qkLverdWfDn0u_MMyH-d8g9w6XUJjTdA1W-Wm7f-agYLux1-iDf7UV_VWKLB9gEVWWH6S-fLOpQ=w2400" alt="PERRETINA" width="40%" />
+</p>
+
+
+---
+
+## 📬 Contact
+
+**Hernán García Quijano** — <hernan.garcia.quijano@alumnos.upm.es>  
+**Ángel Rodrigo Pérez Iglesias** — <angelrodrigo.perez@alumnos.upm.es>
 
 
